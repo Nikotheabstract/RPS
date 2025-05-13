@@ -14,26 +14,42 @@ return answer;
 }
 
 function getHumanChoice(){
-   let humanChoice = prompt("rock, paper or scissors?", " ");
+   let humanChoice = prompt("rock, paper or scissors?", "");
    console.log(`you chose ${humanChoice}`)
    return humanChoice.toLowerCase();
 }  
 
-function playRound(ComputerChoice, HumanChoice){
+let computerScore = 0;
+let humanScore = 0;
+
+
+function playRound(ComputerChoice, HumanChoice) {
     if ((ComputerChoice === "rock" && HumanChoice === "scissors") ||
     (ComputerChoice === "paper" && HumanChoice === "rock") ||
     (ComputerChoice === "scissors" && HumanChoice === "paper")){
-    return "you lost"
+        computerScore++;
+        result = "you lost";
     } else if (ComputerChoice === HumanChoice){
-        return "draw"
+        result = "draw"
     } else {
-        console.log("you won!");
-        return "you won!"
+        humanScore++;
+        result = "you won!";
     } 
+    console.log(`score: You ${humanScore} : computer ${computerScore}`);
+    return result
+    }
+
+function playGame(){
+    playRound(getHumanChoice(), getComputerChoice());
+    playRound(getHumanChoice(), getComputerChoice());  
+    playRound(getHumanChoice(), getComputerChoice()); 
+    playRound(getHumanChoice(), getComputerChoice());  
+    playRound(getHumanChoice(), getComputerChoice()); 
+    
+    let gameResult = (humanScore > computerScore)
+        ?"you are the winner!"
+        :(humanScore < computerScore) 
+        ?"you lost!"
+        :"it's a draw!";
+    console.log(gameResult);
 }
-
-
-let computerScore = 0
-let humanScore = 0
-
-
