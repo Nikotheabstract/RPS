@@ -1,11 +1,5 @@
 let HumanChoice = ""
 
-function getHumanChoice(){
-   HumanChoice = prompt("rock, paper or scissors?", "");
-   console.log(`you chose ${HumanChoice}`)
-   return HumanChoice.toLowerCase();
-}  
-
 const cnt = document.querySelectorAll("#container button")
 const container = document.querySelector("#container")
 let div = document.createElement("div")
@@ -16,6 +10,12 @@ cnt.forEach(button =>{
     const computerChoice = getComputerChoice();
     const result = playRound(computerChoice, HumanChoice);
     div.textContent = `You chose ${button.id}. Computer chose ${computerChoice}. ${result}. Score: You ${humanScore} : Computer ${computerScore}`;
+    if (computerScore === 5){
+        div.textContent = `You lost. Your last choice was ${HumanChoice}, computer chose ${computerChoice}, computer took 5 points`
+    } 
+    if (humanScore === 5){
+        div.textContent = `You won! Your last choice was ${HumanChoice}, computer chose ${computerChoice} you took 5 points`;
+    }
     return result;
   });
 });
@@ -55,9 +55,13 @@ function playRound(ComputerChoice, HumanChoice) {
         humanScore++;
         result = "you won!";
     } 
-    div.textContent = `${result} score: You ${humanScore} : computer ${computerScore}`;
+    
+   
     return result
     }
-
+    
+    
     container.appendChild(div);
+
+   
 
